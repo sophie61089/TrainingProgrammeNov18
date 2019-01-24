@@ -1,0 +1,24 @@
+<h1>Participants (All Employee list)</h1>
+
+<table>
+  <tr>
+    <th>EmpID</th>
+    <th>Name</th>
+  </tr>
+  <tr *ngFor="let pa of participants; let i=index">
+    <td>{{pa.employeeId}}</td>
+    <td>{{pa.employeeName}}</td>
+    <td><button (click) = "deleteParticipant(pa.employeeId)">x</button></td>
+  </tr>
+  <tr *ngIf="!isEditable">
+    <td><button (click) = "toggleEditFields()">Add New Traning</button></td>
+  </tr>
+</table>
+<form *ngIf="isEditable" (submit)="addNewParticipant({employeeName:pname.value})">
+  <tr>
+    <td><input placeholder="name" #pname></td>
+    <td><input type="submit" value="Add"></td>
+  </tr>
+</form>
+
+

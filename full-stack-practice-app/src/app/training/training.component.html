@@ -1,0 +1,93 @@
+<h1>Trainings Available</h1>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Location</th>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Duration (Hrs)</th>
+    <th>Leader</th>
+    <th>Spaces</th>
+    <th>Spaces Remaining</th>
+  </tr>
+    <tr *ngFor="let tr of trainings; let i=index">
+      <td><button class=".hidden" (click) = "setTid(tr.trainingId, tr.trainingTitle)">{{tr.trainingId}}</button></td>
+      <td>{{tr.trainingTitle}}</td>
+      <td>{{tr.trainingDescription}}</td>
+      <td>{{tr.trainingLeader}}</td>
+      <td>{{tr.trainingDate}}</td>
+      <td>{{tr.trainingStartTime}}</td>
+      <td>{{tr.trainingDuration}}</td>
+      <td>{{tr.trainingLocation}}</td>
+      <td>{{tr.trainingSpacesTotal}}</td>
+      <td>{{tr.trainingSpacesAvailable}}</td>
+      <td><button (click) = "setTidForSignup(tr.trainingId, tr.trainingTitle); toggleSignUpFormFields()"> SignUp! </button></td>
+      <td><button (click) = "deleteTraining(tr.trainingId)">x</button></td>
+    </tr>
+    <tr *ngIf="!isEditable">
+      <td><button (click) = "toggleEditFields()">Add New Traning</button></td>
+    </tr>
+</table>
+<form *ngIf="isEditable" (submit)="addNewTraining({trainingTitle: ptitle.value, trainingDescription:tdecsription.value, trainingLeader:tleader.value, trainingDate:tdate.value, 
+  trainingStartTime:tstart.value, trainingDuration:tduration.value, trainingLocation:tlocation.value, trainingSpacesTotal:tspacestot.value})">
+  <tr>
+    <td><input #ptitle placeholder="title" ></td>
+    <td><input placeholder="description" #tdecsription></td>
+    <td><input placeholder="leader" #tleader></td>
+    <td><input placeholder="date" #tdate></td>
+    <td><input placeholder="start" #tstart></td>
+    <td><input placeholder="duration" #tduration></td>
+    <td><input placeholder="location" #tlocation></td>
+    <td><input placeholder="spaces available" #tspacestot></td>
+  </tr>
+  <tr>
+    <td><input type="submit" value="Add"></td>
+  </tr>
+</form>
+<form *ngIf="showSignUpForm" (submit)="addParticipantToTraining(tidForSignUp, pid.value)">
+  <tr>
+    <th>Please enter your Employee Id to Sign up for training {{tidForSignUp}}: {{tnameForSignup}}</th>
+  </tr>
+  <tr>
+    <td><input placeholder="Enter your employee Number" #pid></td>
+  </tr>
+  <tr>
+    <td><input type="submit" value="Sign Up Now!"></td>
+  </tr>
+
+</form>
+<h4>Participants attending training {{tid}}: {{tname}}</h4>
+<table>
+  <tr>
+    <th>Participant Employee Id</th>
+    <th>Participant Name</th>
+  </tr>
+  <tr *ngFor="let p of trainingParticipants; let i=index">
+    <td>{{p.employeeId}}</td>
+    <td>{{p.employeeName}}</td>      
+  </tr>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
